@@ -51835,7 +51835,7 @@ page-home .time {
 }
 
 page-home .no-scroll .scroll-content {
-  overflow: visible;
+  overflow: auto;
 }
 
 page-home ion-item {
@@ -51849,15 +51849,42 @@ page-home ion-item ion-input {
   padding: 0;
 }
 
-page-home .scrollChat {
-  height: 700px;
+@media only screen and (max-device-width: 360px) and (max-device-height: 640px) {
+  page-home .test {
+    height: 50px;
+  }
 }
 
-page-home .scrollDiv {
-  position: fixed;
-  overflow: scroll !important;
-  border: 1px solid red;
-  height: 200px;
+@media only screen and (max-device-width: 414px) and (max-device-height: 736px) {
+  page-home .test {
+    height: 330px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 361px) and (max-device-width: 375px) and (min-device-height: 737px) and (max-device-height: 812px) {
+  page-home .test {
+    height: 400px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.list-avatar-page h3 {
+  color: white;
+}
+
+.list-avatar-page ion-note {
+  font-size: 12px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 14px;
 }
 
 page-horizontal-list .back-button {
