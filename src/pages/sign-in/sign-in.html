@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="assets/imgs/netflix-logo.png">
+    </ion-title>
+
+    <ion-buttons right>
+      <button class="help" ion-button clear>HELP</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="no-scroll" text-center padding>
+
+    
+  <ion-row>
+    <p class="sign-in-title">Inicio de sesión</p>
+
+    <ion-item>
+      <ion-label floating>Correo</ion-label>
+      <ion-input type="text" [(ngModel)]="loginData.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Contraseña</ion-label>
+      <ion-input  [type]="passwordType" clearOnEdit="false" [(ngModel)]="loginData.password"></ion-input>
+      <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (tap)='hideShowPassword()' color="netflixRed"></ion-icon>
+    </ion-item>
+
+    <button color="netflixRed" ion-button round full (click)="signIn()">Iniciar sesión</button>
+  </ion-row>  
+
+  <ion-row style="height: 20%; margin-top: 15%;">
+    <ion-col>
+      <p (click)="openForgotPass()">¿Olvidaste tu contraseña?</p>
+      <p (click)="goToSignUp()">¿Nuevo en Cvivo?
+        <strong>Registrate ahora.</strong>
+      </p>
+    </ion-col>
+  </ion-row>
+ 
+</ion-content>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "818528881307",
+    "firebase_url": "https://cvivo-84315.firebaseio.com",
+    "project_id": "cvivo-84315",
+    "storage_bucket": "cvivo-84315.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818528881307:android:00440bdf564acedc",
+        "android_client_info": {
+          "package_name": "cun.cvivo.beta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818528881307-g664sbu2dii0mlvc29ce4267upn69qd9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cun.cvivo.beta",
+            "certificate_hash": "0cfd49a25401fafe7ed5933833c82c847f28ff6f"
+          }
+        },
+        {
+          "client_id": "818528881307-mhakvit2ptfdo37bc7lrmotifrjr5cj3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClGlYtn2bov-q4eZf3COXx-T7IjyTi480"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818528881307-mhakvit2ptfdo37bc7lrmotifrjr5cj3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
