@@ -8,14 +8,14 @@
  
 </ion-header>
 
-<ion-content class="no-scroll list-avatar-page" >
+<ion-content class="list-avatar-page"  padding #pageContent>
    
-    <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content 
          pullingIcon="refresh-circle"
          refreshingSpinner="bubbles">
           </ion-refresher-content>
-        </ion-refresher> -->
+        </ion-refresher>
 
 
    
@@ -39,92 +39,56 @@
                   </ion-segment>
             </ion-col>
           </ion-row>
-        <ion-row>
+        <ion-row  *ngIf="chatEnable && segementHome == 'chat'">
           <ion-col>
-            <ion-scroll  scrollY="true" class="test">            
-              <ion-list *ngFor="let message of messages">
-                 <ion-item no-lines>
-                    <ion-avatar item-start>
-                      <img src="../../assets/imgs/netflix-avatar.png">
-                    </ion-avatar>
-                    <h3>{{message.from}}</h3>
-                    <p>{{message.text}}</p>
-                    <ion-note item-end>{{message.created | date:'hh:MM' }}</ion-note>
-                  </ion-item>
-                </ion-list>   
-              </ion-scroll> 
+               
+              <ion-scroll  scrollY="true" class="test">            
+                  <ion-list *ngFor="let message of messages ">
+                     <ion-item no-lines>
+                        <ion-avatar item-start>
+                          <img src="assets/imgs/netflix-avatar.png">
+                        </ion-avatar>
+                        <h3>{{message.from}}</h3>
+                        <p>{{message.text}}</p>
+                        <ion-note item-end>{{message.created | date:' h:mm' }}</ion-note>
+                      </ion-item>
+                    </ion-list>   
+                  </ion-scroll> 
+              
+             
           </ion-col>
         </ion-row>
     
       </ion-grid>
-   
-  
-   
-        
       
-      
-          
-  
-   
     
-       
-    
-  
-
-
-   
- 
-        
-       <!-- <ion-grid>
-            <ion-row *ngFor="let message of messages" >
-          
-              <ion-col col-9 *ngIf="message.from !== nickname" class="message" [ngClass]="{'my_message':message.from === nickname, 'other_message':message.from !== nickname}">
-                <span class='user_name'>{{message.from}}</span><br>
-                <span>{{message.text}}</span>
-                <div class='time'>{{message.created | date:'dd.MM hh:MM' }}</div>
-              </ion-col>
-          
-              <ion-col offset-3 col-9 *ngIf="message.from === nickname" class="message" [ngClass]="{'my_message':message.from === nickname, 'other_message':message.from !== nickname}">
-                <span class='user_name'>{{message.from}}</span><br>
-                <span>{{message.text}}</span>
-                <div class='time'>{{message.created | date:'dd.MM hh:MM' }}</div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>           -->
-      
-
-
-
-     
-  
-
-    <!-- <ion-list   *ngIf="!chatEnable && segementHome == 'list'" >
-      <div *ngFor="let homeScreenGroup of homeScreenGroups">
+    <ion-list   *ngIf="segementHome == 'list'" >
+      <div *ngFor="let homeScreenGroup of homeScreenGroups"  >
         <div class="item-title">{{homeScreenGroup.name}}</div>
 
         <ion-scroll scrollX="true" scroll-avatar>
           <ion-list>
-            <ion-col *ngFor="let groupItem of homeScreenGroup.groupItems" class="scroll-item">
-              <img src="{{ groupItem.picture }}" (click)="goToGroupItemDetails(groupItem)" />
-            </ion-col>
+            <ion-col  class="scroll-item" *ngFor="let groupItem of homeScreenGroup.groupItems"  >
+              <img src="{{groupItem.detailsPicture}}" (click)="goToGroupItemDetails(groupItem)" />
+            </ion-col>           
           </ion-list>
         </ion-scroll>
-      </div>
+      </div>    
     </ion-list>
 
     <br>
     <br>
-   -->
+  
 
 </ion-content>    
-<ion-footer>
+<ion-footer  [hidden]="segementHome !== 'chat'" >
     <ion-toolbar>   
         <ion-item>    
-            <ion-input [(ngModel)]="message" type="text" placeholder="mensaje"></ion-input>
+            <ion-input [(ngModel)]="message" type="text" placeholder="mensaje"  (keypress)="keyPress($event.keyCode)"></ion-input>
        </ion-item>       
    
        <ion-buttons end>
-         <button ion-button icon-right color="netflixRed" (click)="sendMessage()" >          
+         <button ion-button icon-right color="netflixRed" (click)="sendMessage()">          
            <ion-icon name="send"></ion-icon>
          </button>
  

@@ -1,3 +1,4 @@
+import { VimeoService } from './../services/VimeoService';
 import { ForgotPasswordPageModule } from './../pages/forgot-password/forgot-password.module';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -115,10 +116,11 @@ firebase.initializeApp(firebaseConfig);
     Facebook,
     GooglePlus,
     TwitterConnect,
-    FileTransfer, 
+    FileTransfer,     
     File,
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    VimeoService,
 
   ]
 })

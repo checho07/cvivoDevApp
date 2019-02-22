@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 583:
+/***/ 579:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificationsPageModule", function() { return NotificationsPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GridListPageModule", function() { return GridListPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notifications__ = __webpack_require__(596);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__grid_list__ = __webpack_require__(591);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,33 +18,59 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var NotificationsPageModule = (function () {
-    function NotificationsPageModule() {
+var GridListPageModule = (function () {
+    function GridListPageModule() {
     }
-    NotificationsPageModule = __decorate([
+    GridListPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__notifications__["a" /* NotificationsPage */],
+                __WEBPACK_IMPORTED_MODULE_2__grid_list__["a" /* GridListPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__notifications__["a" /* NotificationsPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__grid_list__["a" /* GridListPage */]),
             ],
         })
-    ], NotificationsPageModule);
-    return NotificationsPageModule;
+    ], GridListPageModule);
+    return GridListPageModule;
 }());
 
-//# sourceMappingURL=notifications.module.js.map
+//# sourceMappingURL=grid-list.module.js.map
 
 /***/ }),
 
-/***/ 596:
+/***/ 590:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Helper; });
+var Helper = (function () {
+    function Helper() {
+    }
+    Helper.shuffle = function (a) {
+        for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            _a = [a[j], a[i]], a[i] = _a[0], a[j] = _a[1];
+        }
+        return a;
+        var _a;
+    };
+    return Helper;
+}());
+
+//# sourceMappingURL=Helper.js.map
+
+/***/ }),
+
+/***/ 591:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GridListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__ = __webpack_require__(597);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_CategoriesService__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_CategoryItem__ = __webpack_require__(592);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_Helper__ = __webpack_require__(590);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -56,60 +82,92 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var NotificationsPage = (function () {
-    function NotificationsPage() {
-        this.notifications = [];
-        this.initialiseNotifications();
+
+
+
+var GridListPage = (function () {
+    function GridListPage(navCtrl, navParams, categoriesService) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.categoriesService = categoriesService;
+        this.loaded = false;
+        this.categoryItems = [];
+        this.category = this.navParams.get("category");
+        if (this.category) {
+            this.title = this.category.name;
+        }
     }
-    NotificationsPage.prototype.initialiseNotifications = function () {
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Play the trailer", "Coming March 5", "assets/imgs/american dream.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("The Hurt Locker", "Now on Netflix for you", "assets/imgs/hurt-locker.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("John Wick: Chapter 2", "New arrival", "assets/imgs/notifications-image1.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Left Behind", "New arrival", "assets/imgs/left-behind.png", true));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Vampire Academy", "New arrival", "assets/imgs/vampire-academy.png", true));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Standup for Dummies", "New arrival", "assets/imgs/standup-for-dummies.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Damnation", "New arrival", "assets/imgs/damnation-notification.png", true));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Almost Banned", "New arrival", "assets/imgs/almost-banned.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Hay gente asi", "New arrival", "assets/imgs/hay-dente-asi.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Riase el Show", "New arrival", "assets/imgs/riase-el-show.png", true));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Great America", "New arrival", "assets/imgs/great-america.png", true));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Especial de Standup", "New arrival", "assets/imgs/especial-de-standup.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Weeds", "New arrival", "assets/imgs/weeds.png", false));
-        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Equanimity", "New arrival", "assets/imgs/equanimity.png", true));
+    GridListPage.prototype.ionViewDidLoad = function () {
+        console.log("ionViewDidLoad GridListPage");
+        this.getCategoryMoviesAndShows();
     };
-    NotificationsPage.prototype.ionViewDidLoad = function () {
-        console.log("ionViewDidLoad NotificationsPage");
+    GridListPage.prototype.getCategoryMoviesAndShows = function () {
+        var _this = this;
+        // Get movies first
+        this.categoriesService
+            .getCategoryMovies(this.category)
+            .then(function (result) {
+            result.categoryMovies.forEach(function (movie) {
+                var categoryItem = new __WEBPACK_IMPORTED_MODULE_3__data_CategoryItem__["a" /* CategoryItem */]();
+                categoryItem.itemId = movie.movieId;
+                categoryItem.name = movie.name;
+                categoryItem.picture = movie.picture;
+                categoryItem.isMovie = true;
+                _this.categoryItems.push(categoryItem);
+            });
+            // Then get tv shows
+            _this.categoriesService
+                .getCategoryTvShows(_this.category)
+                .then(function (result) {
+                result.categoryTvShows.forEach(function (tvShow) {
+                    var categoryItem = new __WEBPACK_IMPORTED_MODULE_3__data_CategoryItem__["a" /* CategoryItem */]();
+                    categoryItem.itemId = tvShow.tvShowId;
+                    categoryItem.name = tvShow.name;
+                    categoryItem.picture = tvShow.picture;
+                    categoryItem.isMovie = false;
+                    _this.categoryItems.push(categoryItem);
+                });
+                // Finally, shuffle them
+                _this.categoryItems = __WEBPACK_IMPORTED_MODULE_4__data_Helper__["a" /* Helper */].shuffle(_this.categoryItems);
+                _this.loaded = true;
+            });
+        });
     };
-    NotificationsPage = __decorate([
+    GridListPage.prototype.goToCategoryItem = function (categoryItem) {
+        if (categoryItem.isMovie) {
+            this.navCtrl.push("MovieDetailsPage", { movieId: categoryItem.itemId });
+        }
+        else {
+            this.navCtrl.push("ShowDetailsPage", { tvShowId: categoryItem.itemId });
+        }
+    };
+    GridListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: "page-notifications",template:/*ion-inline-start:"C:\Users\PC\Desktop\cvivo\src\pages\notifications\notifications.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Notifications</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list no-lines>\n\n    <ion-item *ngFor="let notification of notifications">\n\n      <span [class.hidden]="!notification.isNew" class="dot" item-start></span>\n\n\n\n      <img src="{{ notification.picture }}">\n\n\n\n      <div item-end>\n\n        <p class="new-arrival">{{ notification.description }}</p>\n\n        <p class="title">{{ notification.title }}</p>\n\n        <p class="date">{{ notification.dateTime }}</p>\n\n      </div>\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Users\PC\Desktop\cvivo\src\pages\notifications\notifications.html"*/
+            selector: "page-grid-list",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\grid-list\grid-list.html"*/'<ion-header no-border>\n  <ion-navbar align-title="center">\n    <ion-title>{{ title }}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-row *ngIf="loaded && categoryItems.length <= 0">\n    <ion-col text-center>\n      <img class="demo-image" src="assets/netflix-icon.png">\n      <p class="demo-message">There are no movies or shows in this category yet.</p>\n      <p class="demo-sub-message">Use the Admin Ion Netflix to add your own here!</p>\n    </ion-col>\n  </ion-row>\n\n  <ion-row *ngIf="!loaded">\n    <ion-col text-center>\n      <br>\n      <ion-spinner color="netflixRed"></ion-spinner>\n    </ion-col>\n  </ion-row>\n\n  <ion-row *ngIf="loaded && categoryItems.length > 0" style="padding-left: 0px;">\n    <ion-col col-4 *ngFor="let categoryItem of categoryItems">\n      <img src="{{categoryItem.picture}}" (click)="goToCategoryItem(categoryItem)" style="width:100%">\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\grid-list\grid-list.html"*/
         }),
-        __metadata("design:paramtypes", [])
-    ], NotificationsPage);
-    return NotificationsPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__services_CategoriesService__["a" /* CategoriesService */]])
+    ], GridListPage);
+    return GridListPage;
 }());
 
-//# sourceMappingURL=notifications.js.map
+//# sourceMappingURL=grid-list.js.map
 
 /***/ }),
 
-/***/ 597:
+/***/ 592:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationItem; });
-var NotificationItem = (function () {
-    function NotificationItem(title, description, picture, isNew) {
-        this.title = title;
-        this.description = description;
-        this.dateTime = "15 Feb.";
-        this.picture = picture;
-        this.isNew = isNew;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryItem; });
+var CategoryItem = (function () {
+    function CategoryItem() {
     }
-    return NotificationItem;
+    return CategoryItem;
 }());
 
-//# sourceMappingURL=NotificationItem.js.map
+//# sourceMappingURL=CategoryItem.js.map
 
 /***/ })
 

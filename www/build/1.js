@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 582:
+/***/ 583:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MylistPageModule", function() { return MylistPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotificationsPageModule", function() { return NotificationsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mylist__ = __webpack_require__(594);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__notifications__ = __webpack_require__(597);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MylistPageModule = (function () {
-    function MylistPageModule() {
+var NotificationsPageModule = (function () {
+    function NotificationsPageModule() {
     }
-    MylistPageModule = __decorate([
+    NotificationsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__mylist__["a" /* MylistPage */],
+                __WEBPACK_IMPORTED_MODULE_2__notifications__["a" /* NotificationsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mylist__["a" /* MylistPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__notifications__["a" /* NotificationsPage */]),
             ],
         })
-    ], MylistPageModule);
-    return MylistPageModule;
+    ], NotificationsPageModule);
+    return NotificationsPageModule;
 }());
 
-//# sourceMappingURL=mylist.module.js.map
+//# sourceMappingURL=notifications.module.js.map
 
 /***/ }),
 
-/***/ 594:
+/***/ 597:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MylistPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_UserService__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_AuthService__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_MyListItem__ = __webpack_require__(595);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__ = __webpack_require__(598);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,87 +56,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
-
-var MylistPage = (function () {
-    function MylistPage(navCtrl, userService, authService) {
-        var _this = this;
-        this.navCtrl = navCtrl;
-        this.userService = userService;
-        this.authService = authService;
-        this.userId = "";
-        this.myListItems = [];
-        this.loaded = false;
-        this.authService.afAuth.user.subscribe(function (user) {
-            _this.userId = user.uid;
-        });
+var NotificationsPage = (function () {
+    function NotificationsPage() {
+        this.notifications = [];
+        this.initialiseNotifications();
     }
-    MylistPage.prototype.ionViewDidEnter = function () {
-        console.log("ionViewDidEnter MylistPage");
-        this.getMoviesAndShowsFromMyList();
+    NotificationsPage.prototype.initialiseNotifications = function () {
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Play the trailer", "Coming March 5", "assets/imgs/american dream.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("The Hurt Locker", "Now on Netflix for you", "assets/imgs/hurt-locker.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("John Wick: Chapter 2", "New arrival", "assets/imgs/notifications-image1.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Left Behind", "New arrival", "assets/imgs/left-behind.png", true));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Vampire Academy", "New arrival", "assets/imgs/vampire-academy.png", true));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Standup for Dummies", "New arrival", "assets/imgs/standup-for-dummies.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Damnation", "New arrival", "assets/imgs/damnation-notification.png", true));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Almost Banned", "New arrival", "assets/imgs/almost-banned.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Hay gente asi", "New arrival", "assets/imgs/hay-dente-asi.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Riase el Show", "New arrival", "assets/imgs/riase-el-show.png", true));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Great America", "New arrival", "assets/imgs/great-america.png", true));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Especial de Standup", "New arrival", "assets/imgs/especial-de-standup.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Weeds", "New arrival", "assets/imgs/weeds.png", false));
+        this.notifications.push(new __WEBPACK_IMPORTED_MODULE_1__data_NotificationItem__["a" /* NotificationItem */]("Equanimity", "New arrival", "assets/imgs/equanimity.png", true));
     };
-    MylistPage.prototype.getMoviesAndShowsFromMyList = function () {
-        var _this = this;
-        this.myListItems = [];
-        this.loaded = false;
-        // Get movies from my list first
-        this.userService.getFavoriteMovies(this.userId).then(function (result) {
-            result.favoriteMovies.forEach(function (movie) {
-                var myListItem = new __WEBPACK_IMPORTED_MODULE_4__data_MyListItem__["a" /* MyListItem */]();
-                myListItem.itemId = movie.movieId;
-                myListItem.picture = movie.picture;
-                myListItem.isMovie = true;
-                _this.myListItems.push(myListItem);
-            });
-            // Then get tv shows from my list
-            _this.userService.getFavoriteTvShows(_this.userId).then(function (result) {
-                result.favoriteTvShows.forEach(function (tvShow) {
-                    var myListItem = new __WEBPACK_IMPORTED_MODULE_4__data_MyListItem__["a" /* MyListItem */]();
-                    myListItem.itemId = tvShow.tvShowId;
-                    myListItem.picture = tvShow.picture;
-                    myListItem.isMovie = false;
-                    _this.myListItems.push(myListItem);
-                });
-                _this.loaded = true;
-            });
-        });
+    NotificationsPage.prototype.ionViewDidLoad = function () {
+        console.log("ionViewDidLoad NotificationsPage");
     };
-    MylistPage.prototype.goToMyListItem = function (myListItem) {
-        if (myListItem.isMovie) {
-            this.navCtrl.push("MovieDetailsPage", { movieId: myListItem.itemId });
-        }
-        else {
-            this.navCtrl.push("ShowDetailsPage", { tvShowId: myListItem.itemId });
-        }
-    };
-    MylistPage = __decorate([
+    NotificationsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: "page-mylist",template:/*ion-inline-start:"C:\Users\PC\Desktop\cvivo\src\pages\mylist\mylist.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>My List</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-content padding>\n\n    <ion-row *ngIf="loaded && myListItems.length <= 0" class="movies-shows-row">\n\n      <ion-col text-center>\n\n        <button ion-button clear color="netflixWhite">\n\n          <ion-icon name=\'ios-checkmark-circle\'></ion-icon>\n\n        </button>\n\n\n\n        <p>Movies and TV show that you add to your list appear here.</p>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row *ngIf="loaded && myListItems.length <= 0" class="find-downloads-row">\n\n      <ion-col text-center>\n\n        <button ion-button icon-start color="netflixWhite">\n\n          FIND SOMETHING TO WATCH\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row *ngIf="!loaded">\n\n      <ion-col text-center>\n\n        <br>\n\n        <ion-spinner color="netflixRed"></ion-spinner>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row *ngIf="loaded && myListItems.length > 0" style="padding-left: 0px;">\n\n      <ion-col col-4 *ngFor="let myListItem of myListItems">\n\n        <img src="{{myListItem.picture}}" (click)="goToMyListItem(myListItem)" style="width:100%">\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-content>\n\n</ion-content>'/*ion-inline-end:"C:\Users\PC\Desktop\cvivo\src\pages\mylist\mylist.html"*/
+            selector: "page-notifications",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\notifications\notifications.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Notifications</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list no-lines>\n    <ion-item *ngFor="let notification of notifications">\n      <span [class.hidden]="!notification.isNew" class="dot" item-start></span>\n\n      <img src="{{ notification.picture }}">\n\n      <div item-end>\n        <p class="new-arrival">{{ notification.description }}</p>\n        <p class="title">{{ notification.title }}</p>\n        <p class="date">{{ notification.dateTime }}</p>\n      </div>\n    </ion-item>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\notifications\notifications.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__services_UserService__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_AuthService__["a" /* AuthService */]])
-    ], MylistPage);
-    return MylistPage;
+        __metadata("design:paramtypes", [])
+    ], NotificationsPage);
+    return NotificationsPage;
 }());
 
-//# sourceMappingURL=mylist.js.map
+//# sourceMappingURL=notifications.js.map
 
 /***/ }),
 
-/***/ 595:
+/***/ 598:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyListItem; });
-var MyListItem = (function () {
-    function MyListItem() {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NotificationItem; });
+var NotificationItem = (function () {
+    function NotificationItem(title, description, picture, isNew) {
+        this.title = title;
+        this.description = description;
+        this.dateTime = "15 Feb.";
+        this.picture = picture;
+        this.isNew = isNew;
     }
-    return MyListItem;
+    return NotificationItem;
 }());
 
-//# sourceMappingURL=MyListItem.js.map
+//# sourceMappingURL=NotificationItem.js.map
 
 /***/ })
 

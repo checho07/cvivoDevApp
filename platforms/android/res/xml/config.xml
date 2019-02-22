@@ -82,5 +82,5 @@
     <preference name="SplashScreenDelay" value="8000" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="orientation" value="default" />
-    <preference name="fullscreen" value="true" />
+    <preference name="fullscreen" value="false" />
 </widget>

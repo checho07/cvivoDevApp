@@ -83,11 +83,11 @@ export class MovieDetailsPage {
     this.moviesService.getMovie(this.movieId).then((result: any) => {
       this.movie = <Movie>result.movie;
 
-      this.title = this.movie.name;
-      this.detailsPicture = this.movie.detailsPicture;
-      this.releaseYear = this.movie.releaseYear.toString();
-      this.rating = this.movie.rating;
-      this.description = this.movie.description;
+      // this.title = this.movie.name;
+      // this.detailsPicture = this.movie.detailsPicture;
+      // this.releaseYear = this.movie.releaseYear.toString();
+      // this.rating = this.movie.rating;
+      // this.description = this.movie.description;
 
       this.getIsPartOfMyList();
     });
@@ -152,17 +152,17 @@ export class MovieDetailsPage {
       return;
     }
     
-    if (this.movie.videoUrl === "") {
-      let alert = this.alertController.create({
-        title: "This movie has not yet been uploaded!",
-        subTitle:
-          "Use the Admin Ion Netflix to add the movie and watch it here!",
-        buttons: ["Dismiss"]
-      });
+    // if (this.movie.videoUrl === "") {
+    //   let alert = this.alertController.create({
+    //     title: "This movie has not yet been uploaded!",
+    //     subTitle:
+    //       "Use the Admin Ion Netflix to add the movie and watch it here!",
+    //     buttons: ["Dismiss"]
+    //   });
 
-      alert.present();
-      return;
-    }
+    //   alert.present();
+    //   return;
+    // }
 
     let options: StreamingVideoOptions = {
       successCallback: () => {
@@ -178,7 +178,7 @@ export class MovieDetailsPage {
       controls: true
     };
 
-    this.streamingMedia.playVideo(this.movie.videoUrl, options);
+    // this.streamingMedia.playVideo(this.movie.videoUrl, options);
   }
 
   downloadMovie() {
@@ -188,17 +188,17 @@ export class MovieDetailsPage {
       return false;
     }
 
-    if (this.movie.videoUrl === "") {
-      let alert = this.alertController.create({
-        title: "This movie has not yet been uploaded!",
-        subTitle:
-          "Use the Admin Ion Netflix to add the movie and download it here!",
-        buttons: ["Dismiss"]
-      });
+    // if (this.movie.videoUrl === "") {
+    //   let alert = this.alertController.create({
+    //     title: "This movie has not yet been uploaded!",
+    //     subTitle:
+    //       "Use the Admin Ion Netflix to add the movie and download it here!",
+    //     buttons: ["Dismiss"]
+    //   });
 
-      alert.present();
-      return;
-    }
+    //   alert.present();
+    //   return;
+    // }
 
     this.isDownloading = true;
 
@@ -207,16 +207,16 @@ export class MovieDetailsPage {
       document.getElementById("progressText").innerText = progress + "%";
     });
 
-    this.downloadService.downloadMovie(this.movie).then(
-      (result: any) => {
-        this.showDownloadToast(this.movie.name);
-        this.isDownloading = false;
-        this.isDownloaded = true;
-      },
-      (error: any) => {
-        this.isDownloading = false;
-      }
-    );
+    // this.downloadService.downloadMovie(this.movie).then(
+    //   (result: any) => {
+    //     this.showDownloadToast(this.movie.name);
+    //     this.isDownloading = false;
+    //     this.isDownloaded = true;
+    //   },
+    //   (error: any) => {
+    //     this.isDownloading = false;
+    //   }
+    // );
   }
 
   showDownloadOnDeviceOnlyToast() {

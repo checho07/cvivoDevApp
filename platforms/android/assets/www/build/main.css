@@ -51729,6 +51729,24 @@ page-grid-list .toolbar-title {
   color: #f5f5f1;
 }
 
+page-home {
+  /* Smartphones (portrait and landscape) ----------- */
+  /* Smartphones (landscape) ----------- */
+  /* Smartphones (portrait) ----------- */
+  /* iPads (landscape) ----------- */
+  /* iPads (portrait) ----------- */
+  /* Desktops and laptops ----------- */
+  /* Large screens ----------- */
+  /* iPhone 4 ----------- */
+  /* iPhone 5 ----------- */
+  /* iPhone 6, 7, 8 ----------- */
+  /* iPhone 6+, 7+, 8+ ----------- */
+  /* iPhone X ----------- */
+  /* Samsung Galaxy S3 ----------- */
+  /* Samsung Galaxy S4 ----------- */
+  /* Samsung Galaxy S5 ----------- */
+}
+
 page-home .toolbar-title {
   text-align: center;
 }
@@ -51835,7 +51853,7 @@ page-home .time {
 }
 
 page-home .no-scroll .scroll-content {
-  overflow: hidden;
+  overflow: auto;
 }
 
 page-home ion-item {
@@ -51849,13 +51867,310 @@ page-home ion-item ion-input {
   padding: 0;
 }
 
-page-home .scrollChat {
-  height: 700px;
-  overflow: scroll !important;
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
 }
 
-page-home .scrollDiv {
-  overflow-y: scroll;
+@media only screen and (min-width: 321px) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 300px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 560px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 1224px) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 340px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 1824px) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 340px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 300px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 150px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 260px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 100px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 400px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 896px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 400px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 230px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+  page-home {
+    /* Styles */
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 230px;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3) {
+  page-home {
+    /* Styles */
+  }
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  page-home {
+    /* Styles */
+  }
+  page-home .test {
+    height: 230px;
+    -webkit-scroll-snap-points-y: 100%;
+    -ms-scroll-snap-points-y: 100%;
+    scroll-snap-points-y: 100%;
+  }
+  page-home .test ion-list, page-home .test ion-item {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.list-avatar-page h3 {
+  color: white;
+}
+
+.list-avatar-page ion-note {
+  font-size: 12px;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 14px;
 }
 
 page-horizontal-list .back-button {

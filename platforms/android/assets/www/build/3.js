@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 589:
+/***/ 581:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideoPlaybackPageModule", function() { return VideoPlaybackPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MovieDetailsPageModule", function() { return MovieDetailsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__video_playback__ = __webpack_require__(601);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__movie_details__ = __webpack_require__(594);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,33 +18,62 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var VideoPlaybackPageModule = (function () {
-    function VideoPlaybackPageModule() {
+var MovieDetailsPageModule = (function () {
+    function MovieDetailsPageModule() {
     }
-    VideoPlaybackPageModule = __decorate([
+    MovieDetailsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__video_playback__["a" /* VideoPlaybackPage */],
+                __WEBPACK_IMPORTED_MODULE_2__movie_details__["a" /* MovieDetailsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__video_playback__["a" /* VideoPlaybackPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__movie_details__["a" /* MovieDetailsPage */]),
             ],
         })
-    ], VideoPlaybackPageModule);
-    return VideoPlaybackPageModule;
+    ], MovieDetailsPageModule);
+    return MovieDetailsPageModule;
 }());
 
-//# sourceMappingURL=video-playback.module.js.map
+//# sourceMappingURL=movie-details.module.js.map
 
 /***/ }),
 
-/***/ 601:
+/***/ 590:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VideoPlaybackPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Helper; });
+var Helper = (function () {
+    function Helper() {
+    }
+    Helper.shuffle = function (a) {
+        for (var i = a.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            _a = [a[j], a[i]], a[i] = _a[0], a[j] = _a[1];
+        }
+        return a;
+        var _a;
+    };
+    return Helper;
+}());
+
+//# sourceMappingURL=Helper.js.map
+
+/***/ }),
+
+/***/ 594:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MovieDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_streaming_media__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_MoviesService__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_UserService__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_AuthService__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__data_Helper__ = __webpack_require__(590);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_DownloadService__ = __webpack_require__(104);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -56,63 +85,208 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var VideoPlaybackPage = (function () {
-    function VideoPlaybackPage(viewCtrl, loadingCtrl) {
-        this.viewCtrl = viewCtrl;
-        this.loadingCtrl = loadingCtrl;
-        this.showControls = false;
-        this.isPlaying = false;
-    }
-    VideoPlaybackPage.prototype.ionViewDidLoad = function () {
+
+
+
+
+
+
+var MovieDetailsPage = (function () {
+    function MovieDetailsPage(navCtrl, navParams, streamingMedia, moviesService, userService, authService, downloadService, toastController, alertController, platform) {
         var _this = this;
-        console.log("ionViewDidLoad VideoPlaybackPage");
-        var loading = this.loadingCtrl.create({
-            spinner: "bubbles",
-            content: "Loading..."
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.streamingMedia = streamingMedia;
+        this.moviesService = moviesService;
+        this.userService = userService;
+        this.authService = authService;
+        this.downloadService = downloadService;
+        this.toastController = toastController;
+        this.alertController = alertController;
+        this.platform = platform;
+        this.userId = "";
+        this.movieId = "";
+        this.recentlyAddedMovies = [];
+        this.loaded = false;
+        this.isPartOfMyList = false;
+        this.isDownloading = false;
+        this.isDownloaded = false;
+        this.authService.afAuth.user.subscribe(function (user) {
+            _this.userId = user.uid;
         });
-        loading.present();
-        setTimeout(function () {
-            loading.dismiss();
-            _this.playPause();
-            _this.showVideoControls();
-        }, 2000);
+        this.movieId = this.navParams.get("movieId");
+        if (this.movieId == undefined) {
+            this.movieId = "";
+        }
+        else {
+            this.downloadService
+                .isMovieDownloaded(this.movieId)
+                .then(function (result) {
+                _this.isDownloaded = result.isDownloaded;
+            });
+        }
+    }
+    MovieDetailsPage.prototype.ionViewDidLoad = function () {
+        console.log("ionViewDidLoad MovieDetailsPage");
+        this.getMovie();
+        this.getRecentlyAddedMovies();
     };
-    VideoPlaybackPage.prototype.showVideoControls = function () {
+    MovieDetailsPage.prototype.getMovie = function () {
         var _this = this;
-        if (!this.showControls) {
-            this.showControls = true;
-            setTimeout(function () {
-                _this.showControls = false;
-            }, 5000);
+        this.moviesService.getMovie(this.movieId).then(function (result) {
+            _this.movie = result.movie;
+            // this.title = this.movie.name;
+            // this.detailsPicture = this.movie.detailsPicture;
+            // this.releaseYear = this.movie.releaseYear.toString();
+            // this.rating = this.movie.rating;
+            // this.description = this.movie.description;
+            _this.getIsPartOfMyList();
+        });
+    };
+    MovieDetailsPage.prototype.getRecentlyAddedMovies = function () {
+        var _this = this;
+        this.moviesService.getRecentlyAddedMovies().then(function (result) {
+            _this.recentlyAddedMovies = __WEBPACK_IMPORTED_MODULE_6__data_Helper__["a" /* Helper */].shuffle(result.movies);
+            _this.loaded = true;
+        });
+    };
+    MovieDetailsPage.prototype.getIsPartOfMyList = function () {
+        var _this = this;
+        this.userService
+            .getIsMoviePartOfMyList(this.userId, this.movieId)
+            .then(function (result) {
+            _this.isPartOfMyList = result.isPartOfMyList;
+        });
+    };
+    MovieDetailsPage.prototype.addToMyList = function () {
+        var _this = this;
+        this.userService
+            .addMovieToMyList(this.userId, this.movie)
+            .then(function (result) {
+            _this.isPartOfMyList = true;
+            _this.showPartOfMyListToast(true);
+        });
+    };
+    MovieDetailsPage.prototype.removeFromMyList = function () {
+        var _this = this;
+        this.userService
+            .removeMovieFromMyList(this.userId, this.movieId)
+            .then(function (result) {
+            _this.isPartOfMyList = false;
+            _this.showPartOfMyListToast(false);
+        });
+    };
+    MovieDetailsPage.prototype.showPartOfMyListToast = function (added) {
+        var toast = this.toastController.create({
+            message: added ? "Added to My List" : "Removed from My List",
+            duration: 2000,
+            position: "bottom"
+        });
+        toast.present();
+    };
+    MovieDetailsPage.prototype.goToMovie = function (movie) {
+        this.navCtrl.push("MovieDetailsPage", { movieId: movie.movieId });
+    };
+    MovieDetailsPage.prototype.playMovie = function () {
+        if (!this.platform.is("cordova")) {
+            var alert_1 = this.alertController.create({
+                title: "Run on device",
+                subTitle: "This feature is only available on a device!",
+                buttons: ["Dismiss"]
+            });
+            alert_1.present();
+            return;
         }
+        // if (this.movie.videoUrl === "") {
+        //   let alert = this.alertController.create({
+        //     title: "This movie has not yet been uploaded!",
+        //     subTitle:
+        //       "Use the Admin Ion Netflix to add the movie and watch it here!",
+        //     buttons: ["Dismiss"]
+        //   });
+        //   alert.present();
+        //   return;
+        // }
+        var options = {
+            successCallback: function () {
+                console.log("Video played");
+            },
+            errorCallback: function (e) {
+                console.log("Error streaming");
+            },
+            orientation: "landscape",
+            shouldAutoClose: true,
+            controls: true
+        };
+        // this.streamingMedia.playVideo(this.movie.videoUrl, options);
     };
-    VideoPlaybackPage.prototype.playPause = function () {
-        var video = document.getElementById("video");
-        console.log(video);
-        if (video) {
-            if (this.isPlaying) {
-                video.pause();
-            }
-            else {
-                video.play();
-            }
-            this.isPlaying = !this.isPlaying;
+    MovieDetailsPage.prototype.downloadMovie = function () {
+        // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
+        if (!this.platform.is("cordova")) {
+            this.showDownloadOnDeviceOnlyToast();
+            return false;
         }
+        // if (this.movie.videoUrl === "") {
+        //   let alert = this.alertController.create({
+        //     title: "This movie has not yet been uploaded!",
+        //     subTitle:
+        //       "Use the Admin Ion Netflix to add the movie and download it here!",
+        //     buttons: ["Dismiss"]
+        //   });
+        //   alert.present();
+        //   return;
+        // }
+        this.isDownloading = true;
+        this.downloadService.movieFileTransfer.onProgress(function (event) {
+            var progress = Math.round((event.loaded / event.total) * 100);
+            document.getElementById("progressText").innerText = progress + "%";
+        });
+        // this.downloadService.downloadMovie(this.movie).then(
+        //   (result: any) => {
+        //     this.showDownloadToast(this.movie.name);
+        //     this.isDownloading = false;
+        //     this.isDownloaded = true;
+        //   },
+        //   (error: any) => {
+        //     this.isDownloading = false;
+        //   }
+        // );
     };
-    VideoPlaybackPage.prototype.goBack = function () {
-        this.viewCtrl.dismiss();
+    MovieDetailsPage.prototype.showDownloadOnDeviceOnlyToast = function () {
+        var toast = this.toastController.create({
+            message: 'You can only download on a device!',
+            duration: 2000,
+            position: "bottom"
+        });
+        toast.present();
     };
-    VideoPlaybackPage = __decorate([
+    MovieDetailsPage.prototype.showDownloadToast = function (movieName) {
+        var toast = this.toastController.create({
+            message: 'Movie "' + movieName + '" successfully downloaded!',
+            duration: 2000,
+            position: "bottom"
+        });
+        toast.present();
+    };
+    MovieDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: "page-video-playback",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\video-playback\video-playback.html"*/'<ion-content class="no-scroll" padding text-center>\n\n  <div>\n\n    <video id="video" (tap)="showVideoControls()">\n\n      <source src="https://firebasestorage.googleapis.com/v0/b/testytest-7bef1.appspot.com/o/Black%20Lightning%20_%20Series%20Trailer%20_%20The%20CW.mp4?alt=media&token=ee3f79b7-c716-4dca-9eea-23fa51a78e7f">\n\n    </video>\n\n  </div> \n\n\n\n  <ion-row style="height: 8%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite" (click)="playPause()">\n\n        <ion-icon name=\'md-play\' *ngIf="!isPlaying"></ion-icon>\n\n        <ion-icon name=\'md-pause\' *ngIf="isPlaying"></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite" (cick)="goBack()">\n\n        <ion-icon name=\'md-arrow-round-back\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-refresh\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 40%;" *ngIf="showControls">\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-4>\n\n      <p class="title">Black Lightning</p>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-10></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'logo-rss\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-10></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-albums\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <p>02:53</p>\n\n    </ion-col>\n\n\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n          <ion-icon name=\'md-paper\'></ion-icon>\n\n        </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-expand\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-volume-up\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\video-playback\video-playback.html"*/
+            selector: "page-movie-details",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\movie-details\movie-details.html"*/'<ion-header no-border>\n\n  <ion-navbar transparent>\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="netflixWhite">\n\n        <ion-icon name="logo-rss" item-end></ion-icon>\n\n      </button>\n\n\n\n      <button ion-button icon-only color="netflixWhite">\n\n        <ion-icon name="md-share" item-end></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content fullscreen padding>\n\n  <img class="details-picture" src="{{detailsPicture}}">\n\n\n\n  <button (click)="playMovie()" class="play-movie" ion-button icon-only clear>\n\n    <ion-icon name="md-play" item-end></ion-icon>\n\n  </button>\n\n\n\n  <p class="title">{{title}}</p>\n\n\n\n  <ion-row class="movie-details-row">\n\n    <p class="match-percentage">99% Match</p>\n\n    <p>{{releaseYear}}</p>\n\n    <p>{{rating}}</p>\n\n    <p>2h 2m</p>\n\n  </ion-row>\n\n\n\n  <ion-row class="movie-summary-row">\n\n    <p>{{description}}</p>\n\n  </ion-row>\n\n\n\n  <ion-row class="list-like-download-row">\n\n    <ion-col text-center col-3>\n\n      <button *ngIf="!isPartOfMyList" (click)="addToMyList()" ion-button icon-only clear color="netflixWhite">\n\n        <ion-icon name="md-add"></ion-icon>\n\n      </button>\n\n\n\n      <button class="isPartOfMyList" *ngIf="isPartOfMyList" (click)="removeFromMyList()" ion-button icon-only clear color="netflixWhite">\n\n        <ion-icon name="md-checkmark"></ion-icon>\n\n      </button>\n\n\n\n      <p>My List</p>\n\n    </ion-col>\n\n\n\n    <ion-col text-center col-3>\n\n      <button ion-button icon-only clear color="netflixWhite">\n\n        <ion-icon name="md-thumbs-up"></ion-icon>\n\n      </button>\n\n\n\n      <p>Rate</p>\n\n    </ion-col>\n\n\n\n    <ion-col text-center col-3>\n\n      <div *ngIf="!isDownloading && !isDownloaded">\n\n        <button (click)="downloadMovie()" ion-button icon-only clear color="netflixWhite">\n\n          <ion-icon name="md-download"></ion-icon>\n\n        </button>\n\n\n\n        <p>Download</p>\n\n      </div>\n\n\n\n      <div *ngIf="isDownloading && !isDownloaded">\n\n        <ion-spinner style="width: 35px; height: 35px;" color="netflixRed"></ion-spinner>\n\n        <p id="progressText">{{progress}}</p>\n\n      </div>\n\n\n\n      <div *ngIf="isDownloaded">\n\n        <button class="downloaded" ion-button icon-only clear>\n\n          <ion-icon name="md-checkmark"></ion-icon>\n\n        </button>\n\n\n\n        <p class="downloaded">Downloaded</p>\n\n      </div>\n\n    </ion-col>\n\n\n\n    <ion-col col-25></ion-col>\n\n  </ion-row>\n\n\n\n  <p class="more-like-this-title">More like this</p>\n\n\n\n  <ion-row *ngIf="!loaded">\n\n    <ion-col text-center>\n\n      <br>\n\n      <ion-spinner color="netflixRed"></ion-spinner>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row *ngIf="loaded" style="padding-left: 0px;">\n\n    <ion-col col-4 *ngFor="let movie of recentlyAddedMovies">\n\n      <img (click)="goToMovie(movie)" src="{{movie.picture}}" style="width:100%">\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\movie-details\movie-details.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
-    ], VideoPlaybackPage);
-    return VideoPlaybackPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__ionic_native_streaming_media__["a" /* StreamingMedia */],
+            __WEBPACK_IMPORTED_MODULE_3__services_MoviesService__["a" /* MoviesService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_UserService__["a" /* UserService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_AuthService__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_7__services_DownloadService__["a" /* DownloadService */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]])
+    ], MovieDetailsPage);
+    return MovieDetailsPage;
 }());
 
-//# sourceMappingURL=video-playback.js.map
+//# sourceMappingURL=movie-details.js.map
 
 /***/ })
 

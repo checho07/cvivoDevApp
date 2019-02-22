@@ -60,33 +60,33 @@ export class DownloadService {
   }
 
   downloadMovie(movie: Movie) {
-    const promise = new Promise((resolve, reject) => {
-      this.movieFileTransfer
-        .download(movie.videoUrl, this.file.dataDirectory + movie.name + ".mp4")
-        .then(
-          entry => {
-            console.log("download complete: " + JSON.stringify(entry.toURL()));
+    // const promise = new Promise((resolve, reject) => {
+    //   this.movieFileTransfer
+    //     .download(movie.videoUrl, this.file.dataDirectory + movie.name + ".mp4")
+    //     .then(
+    //       entry => {
+    //         console.log("download complete: " + JSON.stringify(entry.toURL()));
 
-            this.moviesDownloaded.push({
-              movieId: movie.movieId,
-              name: movie.name,
-              picture: movie.picture,
-              detailsPicture: movie.detailsPicture,
-              downloadUrl: entry.toURL()
-            });
+    //         this.moviesDownloaded.push({
+    //           movieId: movie.movieId,
+    //           name: movie.name,
+    //           picture: movie.picture,
+    //           detailsPicture: movie.detailsPicture,
+    //           downloadUrl: entry.toURL()
+    //         });
 
-            this.storage.set("movies", this.moviesDownloaded);
+    //         this.storage.set("movies", this.moviesDownloaded);
 
-            resolve({ downloadUrl: entry.toURL() });
-          },
-          error => {
-            console.error(JSON.stringify(error));
-            reject(error);
-          }
-        );
-    });
+    //         resolve({ downloadUrl: entry.toURL() });
+    //       },
+    //       error => {
+    //         console.error(JSON.stringify(error));
+    //         reject(error);
+    //       }
+    //     );
+    // });
 
-    return promise;
+    // return promise;
   }
 
   downloadEpisode(episode: Episode) {

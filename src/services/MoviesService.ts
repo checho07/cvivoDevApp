@@ -16,14 +16,14 @@ export class MoviesService {
         .then(doc => {
           const movie = new Movie();
 
-          movie.movieId = doc.id;
-          movie.name = doc.data().name;
-          movie.picture = doc.data().picture;
-          movie.detailsPicture = doc.data().detailsPicture;
-          movie.releaseYear = doc.data().releaseYear;
-          movie.rating = doc.data().rating;
-          movie.description = doc.data().description;
-          movie.videoUrl = doc.data().videoUrl;
+          // movie.movieId = doc.id;
+          // movie.name = doc.data().name;
+          // movie.picture = doc.data().picture;
+          // movie.detailsPicture = doc.data().detailsPicture;
+          // movie.releaseYear = doc.data().releaseYear;
+          // movie.rating = doc.data().rating;
+          // movie.description = doc.data().description;
+          // movie.videoUrl = doc.data().videoUrl;
 
           resolve({ movie: movie });
         });
@@ -45,14 +45,14 @@ export class MoviesService {
           moviesSnapshot.forEach(doc => {
             const movie = new Movie();
 
-            movie.movieId = doc.id;
-            movie.name = doc.data().name;
-            movie.picture = doc.data().picture;
-            movie.detailsPicture = doc.data().detailsPicture;
-            movie.releaseYear = doc.data().releaseYear;
-            movie.rating = doc.data().rating;
-            movie.description = doc.data().description;
-            movie.videoUrl = doc.data().videoUrl;
+            // movie.movieId = doc.id;
+            // movie.name = doc.data().name;
+            // movie.picture = doc.data().picture;
+            // movie.detailsPicture = doc.data().detailsPicture;
+            // movie.releaseYear = doc.data().releaseYear;
+            // movie.rating = doc.data().rating;
+            // movie.description = doc.data().description;
+            // movie.videoUrl = doc.data().videoUrl;
 
             movies.push(movie);
           });
@@ -78,14 +78,14 @@ export class MoviesService {
           moviesSnapshot.forEach(doc => {
             const movie = new Movie();
 
-            movie.movieId = doc.id;
-            movie.name = doc.data().name;
-            movie.picture = doc.data().picture;
-            movie.detailsPicture = doc.data().detailsPicture;
-            movie.releaseYear = doc.data().releaseYear;
-            movie.rating = doc.data().rating;
-            movie.description = doc.data().description;
-            movie.videoUrl = doc.data().videoUrl;
+            // movie.movieId = doc.id;
+            // movie.name = doc.data().name;
+            // movie.picture = doc.data().picture;
+            // movie.detailsPicture = doc.data().detailsPicture;
+            // movie.releaseYear = doc.data().releaseYear;
+            // movie.rating = doc.data().rating;
+            // movie.description = doc.data().description;
+            // movie.videoUrl = doc.data().videoUrl;
 
             movies.push(movie);
           });

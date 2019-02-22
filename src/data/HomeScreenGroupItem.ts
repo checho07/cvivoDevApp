@@ -1,5 +1,7 @@
 export class HomeScreenGroupItem {
-    itemId: string;
+    movieId: string;
+    name: string;
     picture: string;
-    isMovie: boolean;
+    description: string;
+    detailsPicture:string;
 }

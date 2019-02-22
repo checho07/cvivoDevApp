@@ -42,14 +42,14 @@ export class CategoriesService {
           categoryMoviesSnapshot.forEach(doc => {
             const movie = new Movie();
 
-            movie.categoryMovieId = doc.id;
-            movie.movieId = doc.data().movieId;
-            movie.name = doc.data().name;
-            movie.picture = doc.data().picture;
-            movie.releaseYear = doc.data().releaseYear;
-            movie.rating = doc.data().rating;
-            movie.description = doc.data().description;
-            movie.videoUrl = doc.data().videoUrl;
+            // movie.categoryMovieId = doc.id;
+            // movie.movieId = doc.data().movieId;
+            // movie.name = doc.data().name;
+            // movie.picture = doc.data().picture;
+            // movie.releaseYear = doc.data().releaseYear;
+            // movie.rating = doc.data().rating;
+            // movie.description = doc.data().description;
+            // movie.videoUrl = doc.data().videoUrl;
 
             categoryMovies.push(movie);
           });
