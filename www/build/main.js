@@ -1372,8 +1372,15 @@ var HomePage = (function () {
         this.message = '';
     }
     HomePage.prototype.ionViewDidEnter = function () {
+        this.gethomeVideo();
+        this.getChatSection();
+        this.getHomeGroups();
+    };
+    ;
+    HomePage.prototype.getHomeGroups = function () {
         var _this = this;
         this.VimeoService.getHomeScreenGroups().subscribe(function (res) {
+            _this.homeScreenGroups = [];
             var collection = res;
             collection.forEach(function (element) {
                 var homeGropuModel = new __WEBPACK_IMPORTED_MODULE_8__data_HomeScreenGroup__["a" /* HomeScreenGroup */]();
@@ -1398,10 +1405,7 @@ var HomePage = (function () {
                 });
             });
         });
-        // this.gethomeVideo();
-        // this.getChatSection();
     };
-    ;
     /**
      * Funcion para que el usuario al oprimir ENTER pueda enviar un mensaje
      * @param key codigo de la tecla presionada
