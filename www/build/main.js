@@ -1372,9 +1372,7 @@ var HomePage = (function () {
         this.message = '';
     }
     HomePage.prototype.ionViewDidEnter = function () {
-        this.gethomeVideo();
         this.getChatSection();
-        this.getHomeGroups();
     };
     ;
     HomePage.prototype.getHomeGroups = function () {
@@ -1486,9 +1484,24 @@ var HomePage = (function () {
      * Funcion que se ejecuta automaticamnete cuando la vista termina de cargar.
      */
     HomePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
         console.log("ionViewDidLoad HomePage");
         // this.getHomeScreenGroups();
-        this.loadMessges();
+        var loading = this.loadingCtrl.create({
+            spinner: "bubbles",
+            content: "Registrando..."
+        });
+        loading.present();
+        this.gethomeVideo().then(function () {
+            _this.loadMessges();
+            _this.getHomeGroups();
+            setTimeout(function () {
+                loading.dismiss();
+            }, 2000);
+        }, function (err) {
+            loading.dismiss();
+            _this.showAlert(err, 'Error de conexion');
+        });
     };
     /**
      * Funcion que envia un mensaje por meido de SOCKET.IO
@@ -1576,6 +1589,7 @@ var HomePage = (function () {
      */
     HomePage.prototype.doRefresh = function (refresher) {
         var _this = this;
+        this.getHomeGroups();
         this.gethomeVideo().then(function (res) {
             console.log(res);
             refresher.complete();

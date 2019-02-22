@@ -56,16 +56,18 @@ export class HomePage {
     private chatService : ChatService,
     private toastCtrl: ToastController,
     private VimeoService: VimeoService
-  ) {}
+  ) {
 
+  }
+  
   ionViewDidEnter(){ 
-     
-      this.gethomeVideo();
-      this.getChatSection();
-      this.getHomeGroups()
+    this.getChatSection();
+      
       
      
   };
+
+  
 
   getHomeGroups(){
     this.VimeoService.getHomeScreenGroups().subscribe(res=>{
@@ -196,7 +198,25 @@ export class HomePage {
   ionViewDidLoad() {
     console.log("ionViewDidLoad HomePage");
     // this.getHomeScreenGroups();
-    this.loadMessges();
+    
+  var loading = this.loadingCtrl.create({
+    spinner: "bubbles",
+    content: "Registrando..."
+  });
+  loading.present();
+  this.gethomeVideo().then(()=>{
+    this.loadMessges();         
+    this.getHomeGroups()
+    setTimeout(() => {
+     
+      loading.dismiss();
+    }, 2000);
+  
+  },err=>{
+    loading.dismiss();
+    this.showAlert(err,'Error de conexion')
+  }); 
+    
   }
 
 /**
@@ -304,7 +324,9 @@ export class HomePage {
  * para recargar el video 
  * @param refresher 
  */
-   doRefresh(refresher) {
+   doRefresh(refresher) {  
+      
+    this.getHomeGroups()
     this.gethomeVideo().then(res =>{
       console.log(res)
       refresher.complete();
