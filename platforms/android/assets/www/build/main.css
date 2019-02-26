@@ -52233,6 +52233,7 @@ page-movie-details .content {
 
 page-movie-details .content .details-picture {
   width: 100%;
+  height: 400px;
 }
 
 page-movie-details .content .play-movie {

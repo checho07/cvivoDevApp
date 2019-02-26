@@ -23,11 +23,11 @@
 
     <ion-item>
       <ion-label floating>Contraseña</ion-label>
-      <ion-input  [type]="passwordType" clearOnEdit="false" [(ngModel)]="loginData.password"></ion-input>
+      <ion-input  [type]="passwordType" clearOnEdit="false" [(ngModel)]="loginData.password"  (keypress)="keyPress($event.keyCode)"></ion-input>
       <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (tap)='hideShowPassword()' color="netflixRed"></ion-icon>
     </ion-item>
 
-    <button color="netflixRed" ion-button round full (click)="signIn()">Iniciar sesión</button>
+    <button color="netflixRed" ion-button round full (click)="signIn()" >Iniciar sesión</button>
   </ion-row>  
 
   <ion-row style="height: 20%; margin-top: 15%;">

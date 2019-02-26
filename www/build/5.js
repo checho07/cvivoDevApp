@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 588:
+/***/ 586:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersPageModule", function() { return UsersPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingsPageModule", function() { return SettingsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__users__ = __webpack_require__(601);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__settings__ = __webpack_require__(598);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,31 +18,31 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var UsersPageModule = (function () {
-    function UsersPageModule() {
+var SettingsPageModule = (function () {
+    function SettingsPageModule() {
     }
-    UsersPageModule = __decorate([
+    SettingsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__users__["a" /* UsersPage */],
+                __WEBPACK_IMPORTED_MODULE_2__settings__["a" /* SettingsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__users__["a" /* UsersPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__settings__["a" /* SettingsPage */]),
             ],
         })
-    ], UsersPageModule);
-    return UsersPageModule;
+    ], SettingsPageModule);
+    return SettingsPageModule;
 }());
 
-//# sourceMappingURL=users.module.js.map
+//# sourceMappingURL=settings.module.js.map
 
 /***/ }),
 
-/***/ 601:
+/***/ 598:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsersPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -54,29 +54,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var UsersPage = (function () {
-    function UsersPage() {
-        this.showEditIcon = false;
+var SettingsPage = (function () {
+    function SettingsPage() {
     }
-    UsersPage.prototype.ionViewDidLoad = function () {
-        console.log("ionViewDidLoad UsersPage");
+    SettingsPage.prototype.ionViewDidLoad = function () {
+        console.log("ionViewDidLoad SettingsPage");
     };
-    UsersPage.prototype.editProfiles = function () {
-        this.showEditIcon = true;
-    };
-    UsersPage.prototype.cancelEdit = function () {
-        this.showEditIcon = false;
-    };
-    UsersPage = __decorate([
+    SettingsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: "page-users",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\users\users.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      <img src="assets/imgs/netflix-logo.png">\n    </ion-title>\n\n    <ion-buttons right>\n      <button ion-button icon-only color="netflixWhite" *ngIf="!showEditIcon" (click)="editProfiles()">\n        <ion-icon name="md-create" item-end></ion-icon>\n      </button>\n\n      <button ion-button icon-only color="netflixWhite" *ngIf="showEditIcon" (click)="cancelEdit()">\n        <ion-icon name="md-close-circle" item-end></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="no-scroll" text-center padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <p class="who-watching">Who\'s watching?</p>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <div class="user-thumbnail">\n          <img src="assets/imgs/orange-user.png" [class.low-opacity]="showEditIcon">\n          <p>Mr John Doe</p>\n          <ion-icon *ngIf="showEditIcon" name="md-create"></ion-icon>\n        </div>\n      </ion-col>\n\n      <ion-col col-6>\n        <div class="user-thumbnail">\n          <img src="assets/imgs/blue-user.jpg" [class.low-opacity]="showEditIcon">\n          <p>Parasite 1</p>\n          <ion-icon *ngIf="showEditIcon" name="md-create"></ion-icon>\n        </div>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <div class="user-thumbnail">\n          <img src="assets/imgs/yellow-user.png" [class.low-opacity]="showEditIcon">\n          <p>Parasite 2</p>\n          <ion-icon *ngIf="showEditIcon" name="md-create"></ion-icon>\n        </div>\n      </ion-col>\n\n      <ion-col col-6>\n        <div class="user-thumbnail">\n          <img src="assets/imgs/kids-user.png" [class.low-opacity]="showEditIcon">\n          <p>Kids</p>\n          <ion-icon *ngIf="showEditIcon" name="md-create"></ion-icon>\n        </div>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col col-6>\n        <ion-icon class="add-profile" name="md-add-circle" color="netflixWhite"></ion-icon>\n        <p>Add Profile</p>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\users\users.html"*/
+            selector: "page-settings",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\settings\settings.html"*/'<ion-header no-border>\n  <ion-navbar align-title="center">\n    <ion-title>\n      <img src="assets/imgs/netflix-logo.png">\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list no-lines>\n    <ion-list-header>Video playback</ion-list-header>\n\n    <ion-item>\n      <p class="item-title">Cellular Data Usage</p>\n      <p class="item-subtitle">Automatic (Default data & quality setting)</p>\n    </ion-item>\n\n    <ion-list-header>Notifications</ion-list-header>\n\n    <ion-item>\n      <ion-label class="item-title">Accept push notifications</ion-label>\n      <ion-checkbox color="netflixRed" checked="true" item-end></ion-checkbox>\n    </ion-item>\n\n    <ion-item style="margin-top: -10px;">\n      <p class="item-subtitle">Notifications may include newly-</p>\n      <p class="item-subtitle">added movies, TV shows, personalised</p>\n      <p class="item-subtitle">suggestions or other notices</p>\n    </ion-item>\n\n    <ion-list-header>Downloads</ion-list-header>\n\n    <ion-item>\n      <ion-label class="item-title">Smart Downloads</ion-label>\n      <ion-checkbox color="netflixRed" checked="false" item-end></ion-checkbox>\n    </ion-item>\n\n    <ion-item style="margin-top: -10px;">\n      <p class="item-subtitle">Completely episodes will be deleted and</p>\n      <p class="item-subtitle">replaced with the next episodes, only</p>\n      <p class="item-subtitle">on Wi-Fi</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label class="item-title">Wi-Fi only</ion-label>\n      <ion-checkbox color="netflixRed" checked="true" item-end></ion-checkbox>\n    </ion-item>\n\n    <ion-item>\n      <p class="item-title">Download Video Quality</p>\n      <p class="item-subtitle">Standard</p>\n    </ion-item>\n\n    <ion-item>\n      <p class="item-title">Download Location</p>\n      <p class="item-subtitle">Internal Storage</p>\n    </ion-item>\n\n    <ion-item>\n      <p class="item-title">Internal Storage</p>\n      <p class="item-title" item-end>Default</p>\n    </ion-item>\n\n    <ion-item style="margin-top: -10px;">\n      <div class="light-grey-rectangle"></div>\n      <div class="red-rectangle"></div>\n      <div class="white-rectangle"></div>\n    </ion-item>\n\n    <ion-item style="margin-top: -20px;">\n      <ion-row>\n        <div class="light-grey-square"></div>\n        <p class="used-storage">Used - 10 GB</p>\n        <div class="red-square"></div>\n        <p class="used-storage">Netflix - 5 GB</p>\n        <div class="white-square"></div>\n        <p class="used-storage">Free - 15 GB</p>\n      </ion-row>\n    </ion-item>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\settings\settings.html"*/
         }),
         __metadata("design:paramtypes", [])
-    ], UsersPage);
-    return UsersPage;
+    ], SettingsPage);
+    return SettingsPage;
 }());
 
-//# sourceMappingURL=users.js.map
+//# sourceMappingURL=settings.js.map
 
 /***/ })
 

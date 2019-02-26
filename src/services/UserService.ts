@@ -42,7 +42,7 @@ export class UserService {
         .get()
         .then(moviesFollowedSnapshot => {
           moviesFollowedSnapshot.forEach(doc => {
-            if (doc.id === movieId) {
+            if (doc.id.toString() === movieId) {
               resolve({ isPartOfMyList: true });
             }
           });
@@ -69,7 +69,9 @@ export class UserService {
           {
             movieId: movie.movieId,
             name: movie.name,
-            picture: movie.picture
+            description:movie.description,
+            picture: movie.picture,
+            detailsPicture: movie.detailsPicture
           },
           { merge: true }
         )
@@ -193,6 +195,8 @@ export class UserService {
             movie.movieId = doc.id;
             movie.name = doc.data().name;
             movie.picture = doc.data().picture;
+            movie.detailsPicture = doc.data().detailsPicture;
+            movie.description = doc.data().description;
 
             favoriteMovies.push(movie);
           });

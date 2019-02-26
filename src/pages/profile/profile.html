@@ -2,22 +2,22 @@
   <ion-navbar>
     <ion-title>
       <ion-row (click)="goToUsers()">
-        <ion-col *ngIf="userPicture == null" text-center col-2>
-          <img src="assets/imgs/netflix-avatar.png">
+        <ion-col  text-center col-2>
+          <img src="../../assets/imgs/netflix-avatar.png">
         </ion-col>
-
+<!-- 
         <ion-avatar *ngIf="userPicture != null" text-center col-2>
           <img class="round-image" src="{{userPicture}}">
-        </ion-avatar>
+        </ion-avatar> -->
 
         <ion-col col-8>
-          <p *ngIf="userName == null">Mr John Doe</p>
-          <p *ngIf="userName != null">{{userName}}</p>
+          
+          <p>{{userName}}</p>
         </ion-col>
 
-        <ion-col text-center col-2>
+        <!-- <ion-col text-center col-2>
           <ion-icon name="md-repeat" item-end></ion-icon>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
     </ion-title>
   </ion-navbar>
@@ -25,36 +25,39 @@
 
 <ion-content padding>
   <ion-list class="top-menu-list">
-    <ion-item (click)="goToNotifications()">
+    <!-- <ion-item (click)="goToNotifications()">
       <ion-icon name="md-notifications" item-start></ion-icon>
       <p>Notifications</p>
-    </ion-item>
+    </ion-item> -->
 
     <ion-item (click)="goToMyList()">
-      <ion-icon name="md-checkmark" item-start></ion-icon>
-      <p>My List</p>
+      <ion-icon name="list-box" item-start></ion-icon>
+      <p>Mi lista</p>
     </ion-item>
   </ion-list>
 
   <ion-list no-lines class="user-menu-list">
-    <ion-item (click)="goToSettings()">
+    <!-- <ion-item (click)="goToSettings()">
       <p>App Settings</p>
-    </ion-item>
+    </ion-item> -->
 
-    <ion-item>
+    <!-- <ion-item>
       <p>Account</p>
+    </ion-item> -->
+
+    <ion-item>
+      <p>Acerca de nosotros</p>
     </ion-item>
 
     <ion-item>
-      <p>About</p>
+      <p>Ayuda</p>
     </ion-item>
-
     <ion-item>
-      <p>Help</p>
+      <p>Terminos y condiciones</p>
     </ion-item>
 
     <ion-item (click)="signOut()">
-      <p>Sign Out</p>
+      <p>Cerrar sesión</p>
     </ion-item>
   </ion-list>
 </ion-content>

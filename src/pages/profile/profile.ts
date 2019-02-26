@@ -25,7 +25,9 @@ export class ProfilePage {
     private zone: NgZone,
     private authService: AuthService
   ) {
-
+    this.authService.afAuth.user.subscribe(user => {
+     this.userName = user.email
+    });
   }
 
   ionViewDidLoad() {

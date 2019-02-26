@@ -32,6 +32,17 @@ export class SignInPage {
     console.log("ionViewDidLoad SignInPage");
   }
 
+
+   /**
+  * Funcion para que el usuario al oprimir ENTER pueda enviar un mensaje
+  * @param key codigo de la tecla presionada
+  */
+ keyPress(key){
+  if( key === 13){
+    this.signIn();
+  }
+};
+
   /**
    * Funcion para intercabiar el tipo de input de las contraseñas, para poder revelar y ocultar la  contraseña.
    */

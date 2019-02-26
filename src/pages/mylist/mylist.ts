@@ -1,3 +1,4 @@
+import { HomeScreenGroupItem } from './../../data/HomeScreenGroupItem';
 import { Component } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
 import { UserService } from "../../services/UserService";
@@ -5,6 +6,7 @@ import { AuthService } from "../../services/AuthService";
 import { Movie } from "../../data/Movie";
 import { TvShow } from "../../data/TvShow";
 import { MyListItem } from "../../data/MyListItem";
+import { TabsPage } from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -13,7 +15,7 @@ import { MyListItem } from "../../data/MyListItem";
 })
 export class MylistPage {
   userId: string = "";
-  myListItems: MyListItem[] = [];
+  myListItems: HomeScreenGroupItem[] = [];
   loaded = false;
 
   constructor(
@@ -26,10 +28,15 @@ export class MylistPage {
     });
   }
 
+
   ionViewDidEnter() {
     console.log("ionViewDidEnter MylistPage");
 
     this.getMoviesAndShowsFromMyList();
+  }
+
+  goHome(){
+    this.navCtrl.setRoot(TabsPage)
   }
 
   getMoviesAndShowsFromMyList() {
@@ -39,37 +46,38 @@ export class MylistPage {
     // Get movies from my list first
     this.userService.getFavoriteMovies(this.userId).then((result: any) => {
       result.favoriteMovies.forEach((movie: Movie) => {
-        var myListItem = new MyListItem();
+        var myListItem = new HomeScreenGroupItem();
 
-        myListItem.itemId = movie.movieId;
+        myListItem.movieId = movie.movieId;
+        myListItem.detailsPicture = movie.detailsPicture;
+        myListItem.description = movie.description;
+        myListItem.name = movie.name;
         myListItem.picture = movie.picture;
-        myListItem.isMovie = true;
+
 
         this.myListItems.push(myListItem);
       });
-
+      this.loaded = true;
       // Then get tv shows from my list
-      this.userService.getFavoriteTvShows(this.userId).then((result: any) => {
-        result.favoriteTvShows.forEach((tvShow: TvShow) => {
-          var myListItem = new MyListItem();
+      // this.userService.getFavoriteTvShows(this.userId).then((result: any) => {
+      //   result.favoriteTvShows.forEach((tvShow: TvShow) => {
+      //     var myListItem = new MyListItem();
 
-          myListItem.itemId = tvShow.tvShowId;
-          myListItem.picture = tvShow.picture;
-          myListItem.isMovie = false;
+      //     myListItem.itemId = tvShow.tvShowId;
+      //     myListItem.picture = tvShow.picture;
+      //     myListItem.isMovie = false;
 
-          this.myListItems.push(myListItem);
-        });
+      //     this.myListItems.push(myListItem);
+      //   });
 
-        this.loaded = true;
-      });
+      //   this.loaded = true;
+      // });
     });
   }
 
-  goToMyListItem(myListItem: MyListItem) {
-    if (myListItem.isMovie) {
-      this.navCtrl.push("MovieDetailsPage", { movieId: myListItem.itemId });
-    } else {
-      this.navCtrl.push("ShowDetailsPage", { tvShowId: myListItem.itemId });
-    }
+  goToMyListItem(myListItem: HomeScreenGroupItem) {
+    
+      this.navCtrl.push("MovieDetailsPage", { movieId: myListItem });
+   
   }
 }

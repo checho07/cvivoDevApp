@@ -9,7 +9,8 @@
 </ion-header>
 
 <ion-content class="list-avatar-page"  padding #pageContent>
-   
+
+ 
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content 
          pullingIcon="refresh-circle"
@@ -62,7 +63,7 @@
       </ion-grid>
       
     
-    <ion-list   *ngIf="segementHome == 'list'" >
+    <ion-list   *ngIf="segementHome == 'list' && loaded" >
       <div *ngFor="let homeScreenGroup of homeScreenGroups"  >
         <div class="item-title">{{homeScreenGroup.name}}</div>
 

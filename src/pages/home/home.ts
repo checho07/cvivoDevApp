@@ -41,7 +41,8 @@ export class HomePage {
   messages = [];
   nickname = '';
   message = '';
-  private event;
+  loaded:boolean = false;
+ private event;
 
   constructor(
     private navCtrl: NavController,
@@ -61,11 +62,19 @@ export class HomePage {
   }
   
   ionViewDidEnter(){ 
-    this.getChatSection();
+     this.gethomeVideo();
       
       
      
   };
+
+  ionViewWillLeave(){
+   this.iframe_html = '';
+  }
+  ionViewDidLeave(){
+    this.iframe_html = '';
+  }
+  
 
   
 
@@ -90,7 +99,7 @@ export class HomePage {
           videos.data.forEach(item => {
              let video = new HomeScreenGroupItem();
             video.name = item.name;
-            video.picture = item.pictures.sizes[6].link_with_play_button;
+            video.picture = item.files[2].link;
             video.description = item.description;
             video.detailsPicture = item.pictures.sizes[3].link;
             video.movieId = item.uri.split('/')[2];
@@ -101,7 +110,8 @@ export class HomePage {
      
          
         })
-      });   
+      }); 
+  
     })
   }
 
@@ -201,9 +211,10 @@ export class HomePage {
     
   var loading = this.loadingCtrl.create({
     spinner: "bubbles",
-    content: "Registrando..."
+    content: "Cargando..."
   });
   loading.present();
+  this.getHomeGroups()
   this.gethomeVideo().then(()=>{
     this.loadMessges();         
     this.getHomeGroups()
@@ -216,7 +227,12 @@ export class HomePage {
     loading.dismiss();
     this.showAlert(err,'Error de conexion')
   }); 
-    
+
+  setTimeout(() => {
+     
+    loading.dismiss();
+  }, 2000);
+    this.loaded = true;
   }
 
 /**
@@ -280,13 +296,18 @@ export class HomePage {
   //   });
   // }
 
-  // goToGroupItemDetails(groupItem: HomeScreenGroupItem) {
-  //   if (groupItem.isMovie) {
-  //     this.navCtrl.push("MovieDetailsPage", { movieId: groupItem.itemId });
-  //   } else {
-  //     this.navCtrl.push("ShowDetailsPage", { tvShowId: groupItem.itemId });
-  //   }
-  // }
+  goToGroupItemDetails(groupItem: HomeScreenGroupItem) {
+
+    console.log(groupItem)
+
+    this.navCtrl.push("MovieDetailsPage", { movieId: groupItem })
+
+    // if (groupItem.isMovie) {
+    //   this.navCtrl.push("MovieDetailsPage", { movieId: groupItem.itemId });
+    // } else {
+    //   this.navCtrl.push("ShowDetailsPage", { tvShowId: groupItem.itemId });
+    // }
+  }
 
   playVideoTrailer() {
     if (!this.platform.is("cordova")) {

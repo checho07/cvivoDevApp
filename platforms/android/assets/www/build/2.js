@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 582:
+/***/ 589:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MylistPageModule", function() { return MylistPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VideoPlaybackPageModule", function() { return VideoPlaybackPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mylist__ = __webpack_require__(595);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__video_playback__ = __webpack_require__(601);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MylistPageModule = (function () {
-    function MylistPageModule() {
+var VideoPlaybackPageModule = (function () {
+    function VideoPlaybackPageModule() {
     }
-    MylistPageModule = __decorate([
+    VideoPlaybackPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__mylist__["a" /* MylistPage */],
+                __WEBPACK_IMPORTED_MODULE_2__video_playback__["a" /* VideoPlaybackPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__mylist__["a" /* MylistPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__video_playback__["a" /* VideoPlaybackPage */]),
             ],
         })
-    ], MylistPageModule);
-    return MylistPageModule;
+    ], VideoPlaybackPageModule);
+    return VideoPlaybackPageModule;
 }());
 
-//# sourceMappingURL=mylist.module.js.map
+//# sourceMappingURL=video-playback.module.js.map
 
 /***/ }),
 
-/***/ 595:
+/***/ 601:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MylistPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VideoPlaybackPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_UserService__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_AuthService__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_MyListItem__ = __webpack_require__(596);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,87 +56,63 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
-
-var MylistPage = (function () {
-    function MylistPage(navCtrl, userService, authService) {
-        var _this = this;
-        this.navCtrl = navCtrl;
-        this.userService = userService;
-        this.authService = authService;
-        this.userId = "";
-        this.myListItems = [];
-        this.loaded = false;
-        this.authService.afAuth.user.subscribe(function (user) {
-            _this.userId = user.uid;
-        });
+var VideoPlaybackPage = (function () {
+    function VideoPlaybackPage(viewCtrl, loadingCtrl) {
+        this.viewCtrl = viewCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.showControls = false;
+        this.isPlaying = false;
     }
-    MylistPage.prototype.ionViewDidEnter = function () {
-        console.log("ionViewDidEnter MylistPage");
-        this.getMoviesAndShowsFromMyList();
-    };
-    MylistPage.prototype.getMoviesAndShowsFromMyList = function () {
+    VideoPlaybackPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.myListItems = [];
-        this.loaded = false;
-        // Get movies from my list first
-        this.userService.getFavoriteMovies(this.userId).then(function (result) {
-            result.favoriteMovies.forEach(function (movie) {
-                var myListItem = new __WEBPACK_IMPORTED_MODULE_4__data_MyListItem__["a" /* MyListItem */]();
-                myListItem.itemId = movie.movieId;
-                myListItem.picture = movie.picture;
-                myListItem.isMovie = true;
-                _this.myListItems.push(myListItem);
-            });
-            // Then get tv shows from my list
-            _this.userService.getFavoriteTvShows(_this.userId).then(function (result) {
-                result.favoriteTvShows.forEach(function (tvShow) {
-                    var myListItem = new __WEBPACK_IMPORTED_MODULE_4__data_MyListItem__["a" /* MyListItem */]();
-                    myListItem.itemId = tvShow.tvShowId;
-                    myListItem.picture = tvShow.picture;
-                    myListItem.isMovie = false;
-                    _this.myListItems.push(myListItem);
-                });
-                _this.loaded = true;
-            });
+        console.log("ionViewDidLoad VideoPlaybackPage");
+        var loading = this.loadingCtrl.create({
+            spinner: "bubbles",
+            content: "Loading..."
         });
+        loading.present();
+        setTimeout(function () {
+            loading.dismiss();
+            _this.playPause();
+            _this.showVideoControls();
+        }, 2000);
     };
-    MylistPage.prototype.goToMyListItem = function (myListItem) {
-        if (myListItem.isMovie) {
-            this.navCtrl.push("MovieDetailsPage", { movieId: myListItem.itemId });
-        }
-        else {
-            this.navCtrl.push("ShowDetailsPage", { tvShowId: myListItem.itemId });
+    VideoPlaybackPage.prototype.showVideoControls = function () {
+        var _this = this;
+        if (!this.showControls) {
+            this.showControls = true;
+            setTimeout(function () {
+                _this.showControls = false;
+            }, 5000);
         }
     };
-    MylistPage = __decorate([
+    VideoPlaybackPage.prototype.playPause = function () {
+        var video = document.getElementById("video");
+        console.log(video);
+        if (video) {
+            if (this.isPlaying) {
+                video.pause();
+            }
+            else {
+                video.play();
+            }
+            this.isPlaying = !this.isPlaying;
+        }
+    };
+    VideoPlaybackPage.prototype.goBack = function () {
+        this.viewCtrl.dismiss();
+    };
+    VideoPlaybackPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: "page-mylist",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\mylist\mylist.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>My List</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-content padding>\n\n    <ion-row *ngIf="loaded && myListItems.length <= 0" class="movies-shows-row">\n\n      <ion-col text-center>\n\n        <button ion-button clear color="netflixWhite">\n\n          <ion-icon name=\'ios-checkmark-circle\'></ion-icon>\n\n        </button>\n\n\n\n        <p>Movies and TV show that you add to your list appear here.</p>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row *ngIf="loaded && myListItems.length <= 0" class="find-downloads-row">\n\n      <ion-col text-center>\n\n        <button ion-button icon-start color="netflixWhite">\n\n          FIND SOMETHING TO WATCH\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row *ngIf="!loaded">\n\n      <ion-col text-center>\n\n        <br>\n\n        <ion-spinner color="netflixRed"></ion-spinner>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row *ngIf="loaded && myListItems.length > 0" style="padding-left: 0px;">\n\n      <ion-col col-4 *ngFor="let myListItem of myListItems">\n\n        <img src="{{myListItem.picture}}" (click)="goToMyListItem(myListItem)" style="width:100%">\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-content>\n\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\mylist\mylist.html"*/
+            selector: "page-video-playback",template:/*ion-inline-start:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\video-playback\video-playback.html"*/'<ion-content class="no-scroll" padding text-center>\n\n  <div>\n\n    <video id="video" (tap)="showVideoControls()">\n\n      <source src="https://firebasestorage.googleapis.com/v0/b/testytest-7bef1.appspot.com/o/Black%20Lightning%20_%20Series%20Trailer%20_%20The%20CW.mp4?alt=media&token=ee3f79b7-c716-4dca-9eea-23fa51a78e7f">\n\n    </video>\n\n  </div> \n\n\n\n  <ion-row style="height: 8%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite" (click)="playPause()">\n\n        <ion-icon name=\'md-play\' *ngIf="!isPlaying"></ion-icon>\n\n        <ion-icon name=\'md-pause\' *ngIf="isPlaying"></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite" (cick)="goBack()">\n\n        <ion-icon name=\'md-arrow-round-back\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-refresh\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 40%;" *ngIf="showControls">\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-4>\n\n      <p class="title">Black Lightning</p>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-10></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'logo-rss\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-10></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-albums\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <p>02:53</p>\n\n    </ion-col>\n\n\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n          <ion-icon name=\'md-paper\'></ion-icon>\n\n        </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <ion-row style="height: 10%;" *ngIf="showControls">\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-expand\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n\n\n    <ion-col col-8></ion-col>\n\n\n\n    <ion-col col-2>\n\n      <button ion-button clear color="netflixWhite">\n\n        <ion-icon name=\'md-volume-up\'></ion-icon>\n\n      </button>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\CUN\Desktop\OTT_CEBIAC\ionNetflixMobile\src\pages\video-playback\video-playback.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2__services_UserService__["a" /* UserService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_AuthService__["a" /* AuthService */]])
-    ], MylistPage);
-    return MylistPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
+    ], VideoPlaybackPage);
+    return VideoPlaybackPage;
 }());
 
-//# sourceMappingURL=mylist.js.map
-
-/***/ }),
-
-/***/ 596:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyListItem; });
-var MyListItem = (function () {
-    function MyListItem() {
-    }
-    return MyListItem;
-}());
-
-//# sourceMappingURL=MyListItem.js.map
+//# sourceMappingURL=video-playback.js.map
 
 /***/ })
 

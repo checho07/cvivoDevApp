@@ -43,4 +43,13 @@ getHomeScreenGroups() {
     }
     return this.http.get(this.vimeoURl + "/me"+hohomeScreenGroup.groupId,this.options)
   }
+
+  getAllVideos()  {
+
+    this.options = {
+    headers: this.headersParams
+  }
+  return  this.http.get(this.apiurl + '/videos')      
+
+   };
 }

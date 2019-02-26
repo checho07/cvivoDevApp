@@ -1,3 +1,5 @@
+import { HomeScreenGroupItem } from './../../data/HomeScreenGroupItem';
+import { VimeoService } from './../../services/VimeoService';
 import { Component } from "@angular/core";
 import {
   IonicPage,
@@ -28,9 +30,9 @@ import { DownloadService } from "../../services/DownloadService";
 export class MovieDetailsPage {
   userId: string = "";
   movieId: string = "";
+  urlPathVideo: string = "";
   movie: Movie;
-  recentlyAddedMovies: Movie[] = [];
-
+  recentlyAddedMovies: HomeScreenGroupItem[] = [];
   title: string;
   detailsPicture: string;
   releaseYear: string;
@@ -49,58 +51,79 @@ export class MovieDetailsPage {
     private streamingMedia: StreamingMedia,
     private moviesService: MoviesService,
     private userService: UserService,
-    private authService: AuthService,
     private downloadService: DownloadService,
     private toastController: ToastController,
     private alertController: AlertController,
-    private platform: Platform
+    private platform: Platform,
+    private vimeoService:VimeoService,
+    private authService: AuthService
   ) {
     this.authService.afAuth.user.subscribe(user => {
       this.userId = user.uid;
     });
 
-    this.movieId = this.navParams.get("movieId");
+    this.movie = this.navParams.get("movieId");
 
-    if (this.movieId == undefined) {
-      this.movieId = "";
-    } else {
-      this.downloadService
-        .isMovieDownloaded(this.movieId)
-        .then((result: any) => {
-          this.isDownloaded = result.isDownloaded;
-        });
-    }
+    // if (this.movieId == undefined) {
+    //   this.movieId = "";
+    // } else {
+    //   this.downloadService
+    //     .isMovieDownloaded(this.movieId)
+    //     .then((result: any) => {
+    //       this.isDownloaded = result.isDownloaded;
+    //     });
+    // }
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad MovieDetailsPage");
 
     this.getMovie();
-    this.getRecentlyAddedMovies();
+     this.getRecentlyAddedMovies();
   }
 
-  getMovie() {
-    this.moviesService.getMovie(this.movieId).then((result: any) => {
-      this.movie = <Movie>result.movie;
+  getMovie() {  
 
-      // this.title = this.movie.name;
-      // this.detailsPicture = this.movie.detailsPicture;
-      // this.releaseYear = this.movie.releaseYear.toString();
-      // this.rating = this.movie.rating;
-      // this.description = this.movie.description;
+      this.title = this.movie.name;
+      this.detailsPicture = this.movie.detailsPicture;
+      this.description = this.movie.description;  
+      this.urlPathVideo = this.movie.picture;
+      this.movieId = this.movie.movieId;
+ 
 
-      this.getIsPartOfMyList();
-    });
+     this.getIsPartOfMyList();
   }
 
   getRecentlyAddedMovies() {
-    this.moviesService.getRecentlyAddedMovies().then((result: any) => {
-      this.recentlyAddedMovies = Helper.shuffle(result.movies);
+
+    this.vimeoService.getAllVideos().subscribe(result =>{
+
+      let videos:any = result
+      videos.forEach(item => {
+        let video = new HomeScreenGroupItem();
+        video.name = item.name;
+        video.picture = item.files[2].link;
+        video.description = item.description;
+        video.detailsPicture = item.pictures.sizes[3].link;
+        video.movieId = item.uri.split('/')[2];
+
+       this.recentlyAddedMovies.push(video)
+      //  this.recentlyAddedMovies = Helper.shuffle(result.movies);
+      });
       this.loaded = true;
-    });
+    })
+    // this.moviesService.getRecentlyAddedMovies().then((result: any) => {
+    //   this.recentlyAddedMovies = Helper.shuffle(result.movies);
+    // 
+    // });
+   
   }
 
   getIsPartOfMyList() {
+
+
+    console.log('test')
+    
     this.userService
       .getIsMoviePartOfMyList(this.userId, this.movieId)
       .then((result: any) => {
@@ -128,7 +151,7 @@ export class MovieDetailsPage {
 
   showPartOfMyListToast(added: boolean) {
     let toast = this.toastController.create({
-      message: added ? "Added to My List" : "Removed from My List",
+      message: added ? "Agregado a mi lista" : "Removido de mi lista",
       duration: 2000,
       position: "bottom"
     });
@@ -137,20 +160,20 @@ export class MovieDetailsPage {
   }
 
   goToMovie(movie: Movie) {
-    this.navCtrl.push("MovieDetailsPage", { movieId: movie.movieId });
+    this.navCtrl.push("MovieDetailsPage", { movieId: movie });
   }
 
-  playMovie() {
-    if (!this.platform.is("cordova")) {
-      let alert = this.alertController.create({
-        title: "Run on device",
-        subTitle: "This feature is only available on a device!",
-        buttons: ["Dismiss"]
-      });
+  // playMovie() {
+  //   if (!this.platform.is("cordova")) {
+  //     let alert = this.alertController.create({
+  //       title: "Run on device",
+  //       subTitle: "This feature is only available on a device!",
+  //       buttons: ["Dismiss"]
+  //     });
 
-      alert.present();
-      return;
-    }
+  //     alert.present();
+  //     return;
+  //   }
     
     // if (this.movie.videoUrl === "") {
     //   let alert = this.alertController.create({
@@ -164,29 +187,29 @@ export class MovieDetailsPage {
     //   return;
     // }
 
-    let options: StreamingVideoOptions = {
-      successCallback: () => {
-        console.log("Video played");
-      },
+    // let options: StreamingVideoOptions = {
+    //   successCallback: () => {
+    //     console.log("Video played");
+    //   },
 
-      errorCallback: e => {
-        console.log("Error streaming");
-      },
+    //   errorCallback: e => {
+    //     console.log("Error streaming");
+    //   },
 
-      orientation: "landscape",
-      shouldAutoClose: true,
-      controls: true
-    };
+    //   orientation: "landscape",
+    //   shouldAutoClose: true,
+    //   controls: true
+    // };
 
     // this.streamingMedia.playVideo(this.movie.videoUrl, options);
-  }
+  // }
 
-  downloadMovie() {
-    // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
-    if (!this.platform.is("cordova")) {
-      this.showDownloadOnDeviceOnlyToast();
-      return false;
-    }
+  // downloadMovie() {
+  //   // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
+  //   if (!this.platform.is("cordova")) {
+  //     this.showDownloadOnDeviceOnlyToast();
+  //     return false;
+  //   }
 
     // if (this.movie.videoUrl === "") {
     //   let alert = this.alertController.create({
@@ -200,12 +223,12 @@ export class MovieDetailsPage {
     //   return;
     // }
 
-    this.isDownloading = true;
+    // this.isDownloading = true;
 
-    this.downloadService.movieFileTransfer.onProgress(event => {
-      var progress = Math.round((event.loaded / event.total) * 100);
-      document.getElementById("progressText").innerText = progress + "%";
-    });
+    // this.downloadService.movieFileTransfer.onProgress(event => {
+    //   var progress = Math.round((event.loaded / event.total) * 100);
+    //   document.getElementById("progressText").innerText = progress + "%";
+    // });
 
     // this.downloadService.downloadMovie(this.movie).then(
     //   (result: any) => {
@@ -219,23 +242,23 @@ export class MovieDetailsPage {
     // );
   }
 
-  showDownloadOnDeviceOnlyToast() {
-    let toast = this.toastController.create({
-      message: 'You can only download on a device!',
-      duration: 2000,
-      position: "bottom"
-    });
+  // showDownloadOnDeviceOnlyToast() {
+  //   let toast = this.toastController.create({
+  //     message: 'You can only download on a device!',
+  //     duration: 2000,
+  //     position: "bottom"
+  //   });
 
-    toast.present();
-  }
+  //   toast.present();
+  // }
 
-  showDownloadToast(movieName: string) {
-    let toast = this.toastController.create({
-      message: 'Movie "' + movieName + '" successfully downloaded!',
-      duration: 2000,
-      position: "bottom"
-    });
+  // showDownloadToast(movieName: string) {
+  //   let toast = this.toastController.create({
+  //     message: 'Movie "' + movieName + '" successfully downloaded!',
+  //     duration: 2000,
+  //     position: "bottom"
+  //   });
 
-    toast.present();
-  }
-}
+  //   toast.present();
+  // }
+
